@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soniya’s Birthday Surprise 🎂</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom, #ffe0eb, #ffe9d6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+      transition: all 0.6s ease;
+    }
+
+    h2 {
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.6;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 24px;
+      background-color: #ff6b9a;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Floating balloons */
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 40px;
+      height: 55px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, #ff7eb9, #ff4a88);
+      animation: floatUp 8s infinite ease-in-out;
+      opacity: 0.8;
+    }
+
+    .balloon:nth-child(1) { left: 10%; animation-delay: 0s; background: #ff80ab; }
+    .balloon:nth-child(2) { left: 30%; animation-delay: 2s; background: #ffb3b3; }
+    .balloon:nth-child(3) { left: 50%; animation-delay: 4s; background: #ffd180; }
+    .balloon:nth-child(4) { left: 70%; animation-delay: 1s; background: #80deea; }
+    .balloon:nth-child(5) { left: 85%; animation-delay: 3s; background: #b39ddb; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0); opacity: 0.9; }
+      50% { transform: translateY(-400px) rotate(10deg); opacity: 1; }
+      100% { transform: translateY(-800px) rotate(-10deg); opacity: 0; }
+    }
+
+    /* Typing effect */
+    #typing {
+      white-space: pre-line;
+      border-right: 2px solid #ff6b9a;
+      animation: blink 0.8s infinite;
+      display: inline-block;
+      text-align: left;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
+  <div class="container" id="slide1">
+    <h2>Today is a special day ✨</h2>
+    <p>Want to know what I made on this special day?</p>
+    <button onclick="nextSlide(2)">Show me 🎁</button>
+  </div>
+
+  <div class="container hidden" id="slide2">
+    <h2>Soniya,</h2>
+    <p>
+      You have this quiet kind of magic — you make even ordinary days feel brighter.
+      Every time I talk to you, there’s this calm happiness I can’t explain.
+      I hope today brings you all the warmth and joy.<br><br>
+      <b>Happy Birthday! — from Sravan 🌷</b>
+    </p>
+    <button onclick="nextSlide(3)">Next 💫</button>
+  </div>
+
+  <div class="container hidden" id="slide3">
+    <h2>Wait… it’s not over yet.. I want to tell you something</h2>
+    <button onclick="reveal()">Tell me 💖</button>
+    <div id="message" class="hidden">
+      <p id="typing"></p>
+      <button onclick="restart()">Restart 🎁</button>
+    </div>
+  </div>
+
+  <script>
+    function nextSlide(num) {
+      document.querySelectorAll('.container').forEach(div => div.classList.add('hidden'));
+      document.getElementById('slide' + num).classList.remove('hidden');
+    }
+
+    function reveal() {
+      const msgBox = document.getElementById('message');
+      msgBox.classList.remove('hidden');
+      const text = `Hope you get these kinda wishes every year…\nbut maybe, just maybe, only from me... 💖\nOnce again, Happy Birthday, Soniya 🎂💐`;
+      const typingEl = document.getElementById('typing');
+      let i = 0;
+      typingEl.textContent = "";
+      const interval = setInterval(() => {
+        typingEl.textContent = text.slice(0, i);
+        i++;
+        if (i > text.length) clearInterval(interval);
+      }, 35);
+    }
+
+    function restart() {
+      document.querySelectorAll('.container').forEach(div => div.classList.add('hidden'));
+      document.getElementById('slide1').classList.remove('hidden');
+      document.getElementById('typing').textContent = "";
+      document.getElementById('message').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
